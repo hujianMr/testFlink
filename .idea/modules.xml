@@ -3,6 +3,9 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/com.hj.flink/com.hj.flink.iml" filepath="$PROJECT_DIR$/com.hj.flink/com.hj.flink.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../flink/flink/flink.iml" filepath="$PROJECT_DIR$/../flink/flink/flink.iml" />
+      <module fileurl="file://$PROJECT_DIR$/flink-quickstart-java/flink-quickstart-java.iml" filepath="$PROJECT_DIR$/flink-quickstart-java/flink-quickstart-java.iml" />
+      <module fileurl="file://$PROJECT_DIR$/log-stream/log-stream.iml" filepath="$PROJECT_DIR$/log-stream/log-stream.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/testflink.iml" filepath="$PROJECT_DIR$/.idea/testflink.iml" />
     </modules>
   </component>
