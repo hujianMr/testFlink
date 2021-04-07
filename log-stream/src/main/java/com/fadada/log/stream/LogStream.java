@@ -1,6 +1,7 @@
 package com.fadada.log.stream;
 
 import com.alibaba.fastjson.JSONObject;
+import com.fadada.log.NonSink;
 import org.apache.commons.compress.utils.Lists;
 import org.apache.flink.api.common.eventtime.*;
 import org.apache.flink.api.common.functions.FilterFunction;
@@ -106,7 +107,7 @@ public class LogStream {
         });
         System.out.println("=========================filter===================================");
 
-        DataStreamSink<LogWindowResult> streamSink = map.filter((value) -> {
+        SingleOutputStreamOperator<LogWindowResult> streamSink = map.filter((value) -> {
             if(value.getLog().getLogLevel().equals("ERROR") || value.getLog().getLog().contains("error")){
                 return true;
             }
@@ -114,7 +115,7 @@ public class LogStream {
         }).assignTimestampsAndWatermarks(
                 WatermarkStrategy.<LogAggregation>forBoundedOutOfOrderness(Duration.ofSeconds(5))
                 .withTimestampAssigner((record, ts) -> {
-                    logger.info("事件事件 timestamp = " + record.getTimestamp() + " ts = " + ts);
+                    logger.info("事件时间 timestamp = " + record.getTimestamp() + " ts = " + ts);
                     return record.getTimestamp();
                 }))
                 .setParallelism(1)
@@ -140,7 +141,8 @@ public class LogStream {
                             out.collect(result);
                         }
                     }
-                }).addSink(new LogSinkToMySQL());
+                });
+        streamSink.addSink(new LogSinkToMySQL());
         env.execute("logstream");
     }
 

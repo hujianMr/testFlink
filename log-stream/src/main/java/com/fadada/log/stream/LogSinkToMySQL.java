@@ -1,9 +1,7 @@
 package com.fadada.log.stream;
 
-import com.alibaba.fastjson.JSONObject;
 import org.apache.flink.configuration.Configuration;
 import org.apache.flink.streaming.api.functions.sink.RichSinkFunction;
-
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
